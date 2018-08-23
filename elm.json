@@ -1,12 +1,13 @@
 {
     "type": "package",
-    "name": "ryomt/date-controll",
+    "name": "ryota0624/date-controll",
     "summary": "date controll",
     "license": "BSD-3-Clause",
     "version": "1.0.0",
     "exposed-modules": {
         "DateControll": [
-            "DateControll"
+            "DateControll",
+            "TimeEx"
         ]
     },
     "elm-version": "0.19.0 <= v < 0.20.0",

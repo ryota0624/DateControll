@@ -1,9 +1,13 @@
-module TimeEx exposing (formatYMd, formatYMdHm, fromString, fromYMd, monthFromInt, toDoubleDigitString, toIntMonth)
+module TimeEx exposing (formatYMd, formatYMdHm, fromString, fromYMd, monthFromInt, toIntMonth)
 
+{-| 
+    @docs formatYMd, formatYMdHm, fromString, fromYMd, monthFromInt, toIntMonth
+|-}
 import DateControll exposing (..)
 import Time exposing (..)
 
 
+{-| |-}
 toDoubleDigitString : Int -> String
 toDoubleDigitString day =
     if 0 <= day && day < 10 then
@@ -12,7 +16,7 @@ toDoubleDigitString day =
     else
         String.fromInt day
 
-
+{-| |-}
 formatYMd : Zone -> Posix -> String
 formatYMd zone posix =
     let
@@ -27,25 +31,24 @@ formatYMd zone posix =
     in
     [ year, month, day ] |> List.map String.fromInt |> String.join "-"
 
-
+{-| |-}
 formatYMdHm : Zone -> Posix -> String
 formatYMdHm zone posix =
     let
         hour =
             toHour zone posix |> String.fromInt
-
         minute =
             toMinute zone posix |> String.fromInt
     in
     formatYMd zone posix ++ " " ++ hour ++ ":" ++ minute
 
-
+{-| |-}
 fromYMd : Zone -> Int -> Month -> Int -> Maybe Posix
 fromYMd zone year month day =
     [ year |> String.fromInt, month |> toIntMonth |> toDoubleDigitString, day |> toDoubleDigitString ]
-        |> String.join "-"
+        |> String.join "-" |> fromString zone
 
-
+{-| |-}
 fromString : Zone -> String -> Maybe Posix
 fromString zone str =
     let
@@ -77,7 +80,7 @@ fromString zone str =
         _ ->
             Nothing
 
-
+{-| |-}
 toIntMonth : Month -> Int
 toIntMonth month =
     case month of
@@ -117,7 +120,7 @@ toIntMonth month =
         Dec ->
             12
 
-
+{-| |-}
 monthFromInt : Int -> Maybe Month
 monthFromInt month =
     case month of

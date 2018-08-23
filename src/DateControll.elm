@@ -1,13 +1,25 @@
 module DateControll exposing (Year, addDays, addHour, addHours, daysInMonth, isLeapYear, modifyHour, modifyHours, oneHourUnixtime, substractDays, substractHours, subtractHour)
 
+{-| manipulate
+
+    DATE
+
+    @docs Year, addDays, addHour, addHours, daysInMonth, isLeapYear, modifyHour, modifyHours, oneHourUnixtime, substractDays, substractHours, subtractHour
+
+|
+
+-}
+
 import Time exposing (..)
 
 
+{-| -}
 oneHourUnixtime : Int
 oneHourUnixtime =
     3600
 
 
+{-| -}
 modifyHour : (Int -> Int -> Int) -> Posix -> Posix
 modifyHour operator basePosix =
     let
@@ -17,16 +29,19 @@ modifyHour operator basePosix =
     Time.millisToPosix (operator baseMillis oneHourUnixtime)
 
 
+{-| -}
 addHour : Posix -> Posix
 addHour basePosix =
     modifyHour (+) basePosix
 
 
+{-| -}
 subtractHour : Posix -> Posix
 subtractHour basePosix =
     modifyHour (-) basePosix
 
 
+{-| -}
 modifyHours : Int -> Posix -> Posix
 modifyHours hourCount basePosix =
     let
@@ -40,36 +55,42 @@ modifyHours hourCount basePosix =
         Time.millisToPosix (baseMillis + (oneHourUnixtime * hourCount))
 
 
-
+{-| -}
 addHours : Int -> Posix -> Posix
 addHours hourCount basePosix =
     modifyHours hourCount basePosix
 
 
+{-| -}
 substractHours : Int -> Posix -> Posix
 substractHours hourCount basePosix =
     modifyHours (negate hourCount) basePosix
 
 
+{-| -}
 addDays : Int -> Posix -> Posix
 addDays dayCount basePosix =
     addHours (24 * dayCount) basePosix
 
 
+{-| -}
 substractDays : Int -> Posix -> Posix
 substractDays dayCount basePosix =
     substractHours (24 * dayCount) basePosix
 
 
+{-| -}
 type alias Year =
     Int
 
 
+{-| -}
 isLeapYear : Year -> Bool
 isLeapYear y =
     remainderBy y 400 == 0 || remainderBy y 100 /= 0 && remainderBy y 4 == 0
 
 
+{-| -}
 daysInMonth : Year -> Month -> Int
 daysInMonth year month =
     case month of
