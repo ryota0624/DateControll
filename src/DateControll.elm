@@ -27,26 +27,28 @@ subtractHour basePosix =
     modifyHour (-) basePosix
 
 
-modifyHours : (Int -> Int -> Int) -> Int -> Posix -> Posix
-modifyHours operator hourCount basePosix =
+modifyHours : Int -> Posix -> Posix
+modifyHours hourCount basePosix =
+    let
+        baseMillis =
+            Time.posixToMillis basePosix
+    in
     if hourCount == 0 then
         basePosix
 
-    else if hourCount > 0 then
-        modifyHours operator (hourCount - 1) basePosix
-
     else
-        modifyHours operator (hourCount + 1) basePosix
+        Time.millisToPosix (baseMillis + (oneHourUnixtime * hourCount))
+
 
 
 addHours : Int -> Posix -> Posix
 addHours hourCount basePosix =
-    modifyHours (+) hourCount basePosix
+    modifyHours hourCount basePosix
 
 
 substractHours : Int -> Posix -> Posix
 substractHours hourCount basePosix =
-    modifyHours (-) hourCount basePosix
+    modifyHours (negate hourCount) basePosix
 
 
 addDays : Int -> Posix -> Posix
