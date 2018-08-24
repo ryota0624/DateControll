@@ -3,7 +3,7 @@
     "name": "ryota0624/date-controll",
     "summary": "date controll",
     "license": "BSD-3-Clause",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "exposed-modules": {
         "DateControll": [
             "DateControll",
@@ -14,7 +14,7 @@
     "dependencies": {
         "elm/core": "1.0.0 <= v < 2.0.0",
         "elm/time": "1.0.0 <= v < 2.0.0",
-        "rtfeldman/elm-iso8601-date-strings" : "1.0.0 <= v < 2.0.0"
+        "rtfeldman/elm-iso8601-date-strings": "1.0.0 <= v < 2.0.0"
     },
     "test-dependencies": {
         "elm-explorations/test": "1.0.0 <= v < 2.0.0"
