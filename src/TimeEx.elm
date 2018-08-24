@@ -5,7 +5,7 @@ module TimeEx exposing (formatYMd, formatYMdHm, fromString, fromYMd, monthFromIn
 |-}
 import DateControll exposing (..)
 import Time exposing (..)
-
+import Iso8601 as Iso
 
 {-| |-}
 toDoubleDigitString : Int -> String
@@ -50,35 +50,8 @@ fromYMd zone year month day =
 
 {-| |-}
 fromString : Zone -> String -> Maybe Posix
-fromString zone str =
-    let
-        intDateElements =
-            String.split "-" str
-                |> List.filterMap String.toInt
-
-        posixSeed =
-            millisToPosix 0
-
-        dayCountFromTailMonth year month =
-            List.range 1 month
-                |> List.filterMap (monthFromInt >> Maybe.map (daysInMonth year))
-                |> List.foldl (+) 0
-
-        dayCountFromTailYear year =
-            List.range 1 year
-                |> List.map (\y -> dayCountFromTailMonth y 12)
-                |> List.foldl (+) 0
-    in
-    case intDateElements of
-        [ year, month, day ] ->
-            let
-                addDaysCount =
-                    day + dayCountFromTailMonth year month
-            in
-            Just (addDays day posixSeed)
-
-        _ ->
-            Nothing
+fromString zone str = Iso.toTime (str ++ "T00:00:00.000Z") |> Result.toMaybe
+    
 
 {-| |-}
 toIntMonth : Month -> Int

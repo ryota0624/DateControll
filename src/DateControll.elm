@@ -16,7 +16,7 @@ import Time exposing (..)
 {-| -}
 oneHourUnixtime : Int
 oneHourUnixtime =
-    3600
+    3600000
 
 
 {-| -}
