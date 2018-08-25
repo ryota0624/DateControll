@@ -3,7 +3,7 @@
     "name": "ryota0624/date-controll",
     "summary": "date controll",
     "license": "BSD-3-Clause",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "exposed-modules": {
         "DateControll": [
             "DateControll",
