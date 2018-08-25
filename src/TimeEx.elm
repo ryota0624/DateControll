@@ -29,16 +29,16 @@ formatYMd zone posix =
         day =
             toDay zone posix
     in
-    [ year, month, day ] |> List.map String.fromInt |> String.join "-"
+    [ year, month, day ] |> List.map toDoubleDigitString |> String.join "-"
 
 {-| |-}
 formatYMdHm : Zone -> Posix -> String
 formatYMdHm zone posix =
     let
         hour =
-            toHour zone posix |> String.fromInt
+            toHour zone posix |> toDoubleDigitString
         minute =
-            toMinute zone posix |> String.fromInt
+            toMinute zone posix |> toDoubleDigitString
     in
     formatYMd zone posix ++ " " ++ hour ++ ":" ++ minute
 
